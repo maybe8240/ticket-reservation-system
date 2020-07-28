@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Booking</title>
+{#    <link rel="stylesheet" href="../../static/style.css">#}
+    <link rel="stylesheet" href="{{url_for('static', filename='web_style.css')}}">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+</head>
+<body>
+
+<div class="bcg" style="background: rgba(255,255,255,0.8);height: 800px">
+
+    <div id="head" style="color: black">
+    <div class="head_title">
+        <h1 style="color: #212121">Confirmation</h1>
+    </div>
+    <div class="navigation">
+        <div id="horizontalTab">
+            <ul id="navigation_list">
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
+            </ul>
+        </div>
+    </div>
+    <div class="admin">
+        <div class="sap_table">
+            <div class="admin-table">
+                <div class="admin-table-list">
+                    <a class="admin-table-item" onclick=AdminSignIn()><span>Admin System</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+    <hr />
+
+    <div class="body_content">
+        <div class="left" style="width: 35%;float: left">
+            <div class="img_window">
+                <img src="{{url_for('static', filename='7.jpg')}}">
+            </div>
+        </div>
+        <div class="right" style="width: 40%;float: right;margin-right: 15%">
+            <div class="order_form">
+                <form action="{{ url_for('web.save_order') }}" method="post" style="color: #E5E5E5">
+                     <table style="margin: auto">
+                         <tr style="height: 30px">
+                             {%if 'no_ticket' in session:%}
+                             <p style="color: red">{{session['no_ticket']}}</p>
+                             {%endif%}
+                         </tr>
+                         <tr style="height: 30px">
+                             <td style="color: #212121">{{ form.order_id.label }}</td>
+                             <td>{{ form.order_id }}</td>
+                         </tr>
+                         <tr style="height: 30px">
+                             <td style="color: #212121">{{ form.ticket_type.label }}</td>
+                             <td>{{ form.ticket_type(style="width:145px") }}</td>
+                         </tr>
+                         <tr style="height: 30px">
+                             <td style="color: #212121">{{ form.depart_time.label }}</td>
+                             <td>{{ form.depart_time }}</td>
+                         </tr>
+                         <tr style="height: 30px">
+                             <td style="color: #212121">{{ form.route.label }}</td>
+                             <td>{{ form.route }}</td>
+                         </tr>
+                         <tr style="height: 30px">
+                             <td style="color: #212121">{{ form.email.label }}</td>
+                             <td>{{ form.email(id="mail") }}</td>
+                         </tr>
+                         <tr style="height: 30px">
+                             <td style="color: #212121">{{ form.id_card.label }}</td>
+                             <td>{{ form.id_card(id="signup_id") }}</td>
+                         </tr>
+                     </table>
+                     <input type="submit" value="Confirm" onclick="return check()"style="margin-left: 35%">
+                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function AdminSignIn() {
+	    window.location.replace('{{ url_for('admin.login') }}');
+
+    }
+</script>
+
+<script>
+    var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",
+            21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",
+            34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",
+            43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川"
+            ,52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",
+            64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"}
+    function AdminSignIn() {
+	    window.location.replace('{{ url_for('admin.login') }}');
+
+    }
+    function check_mail() {
+        var mail = document.getElementById('mail').value;
+        var re;
+        re = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        return true;
+    }
+    function check() {
+        var sId=document.getElementById('signup_id').value;
+        var iSum=0 ;
+        //aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女");//此次还可以判断出输入的身份证号的人性别
+        return true;
+
+    }
+</script>
+</body>
+</html>

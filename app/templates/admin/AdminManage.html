@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='admin_style.css')}}">
+    <title>Administrator</title>
+</head>
+<body>
+<div class="head">
+    <h1>System Management</h1>
+    <div class="url">
+        <ul class="menu">
+            <a class="menu-item" href="{{url_for('web.index')}}"><span>Home</span></a>
+            <a class="menu-item" href="{{ url_for('admin.login') }}"><span>Logout</span></a>
+        </ul>
+    </div>
+</div>
+<div class="left">
+    <div class="left-menu">
+        <div class="h5head">
+            <h2>Menu</h2>
+        </div>
+        <div class="admin_manage">
+            <div class="h3head">
+                <h3>Permission Management</h3>
+            </div>
+            <div class="admin_manage_content">
+                <ul class="admin_manage_list">
+                    <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>Add New Administrator</span></a>
+                </ul>
+            </div>
+        </div>
+        <div class="business_manage">
+            <div class="h6head">
+                <h3>Business Management</h3>
+            </div>
+            <div class="business_menu">
+                <ul class="business_menu_list">
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Flight</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Airline Management</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>Order Management</span></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right">
+    <div class="right_title">
+    </div>
+    <div class="admin_manage">
+        <table style="margin:10px;width: 40%">
+            <tr>
+                <td>Username</td>
+                <td>Permission Type</td>
+                <td>Delete</td>
+            </tr>
+            {% for item in admins %}
+            <tr>
+                <td>{{ item.nickname}}</td>
+                <td>{{ item.role }}</td>
+{#                <td><form action="{{ url_for('admin.change_info',nickname=item.nickname) }}" method="post">#}
+{#                <input type="submit" value="Edit">#}
+{#                </form></td>#}
+                <td><form action="{{ url_for('admin.change_info',nickname=item.nickname) }}" method="get">
+                <input type="submit" value="Delete">
+                </form></td>
+{#                <td><a methods="get" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>Delete</span></a> </td>#}
+{#                <td> <a methods="post" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>Edit</span></a> </td>#}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="admin_add_update">
+        <h5 style="text-align: left; color:#cd0a0a" >Add New Administrator</h5>
+        <form action="{{ url_for('admin.add_admin') }}" method="post">
+            <table style="margin: 10px;width: 80%">
+                <tr>
+                    <td>{{ form.nickname.label }}</td>  <td>{{ form.nickname }}</td>
+                    <td>
+                        {% if form.nickname.errors %}
+                        <ul>{% for error in form.nickname.errors %}<li style="color:red">{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label }}</td>  <td>{{ form.password }}</td>
+                </tr>
+            </table>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

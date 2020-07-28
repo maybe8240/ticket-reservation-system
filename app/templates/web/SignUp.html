@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='web_style.css')}}">
+</head>
+<body style="">
+
+<div style="background: rgba(255,255,255,0.8);width: 100%;height: 800px;margin: 0">
+
+
+<div id="head" style="color: black">
+    <div class="head_title">
+        <h1 style="color: #212121">Online Reservation</h1>
+    </div>
+    <div class="navigation">
+        <div id="horizontalTab">
+            <ul id="navigation_list">
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
+            </ul>
+        </div>
+    </div>
+    <div class="admin">
+        <div class="sap_table">
+            <div class="admin-table">
+                <div class="admin-table-list">
+                    <a class="admin-table-item" onclick=AdminSignIn()><span>Admin System</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<hr />
+
+<div class="body_content">
+    <div class="title">
+        <h1 style="color:#363636;font-size: 2.1em">Register</h1>
+    </div>
+    {% for msg in get_flashed_messages()  %}
+        <p style="color: #cd0a0a; text-align: center">{{ msg }}</p>
+    {% endfor %}
+    <div class="signup_form">
+        <form action="{{ url_for('web.register') }}" method="post" style="text-align: center">
+            <table style="margin: auto;width: 30%">
+                <tr style="height: 30px">
+                    <td style="color:#363636;text-align: center">{{ form.nickname.label(style="width:10px") }}</td>
+                    <td style="">{{ form.nickname(style="width:300px;height:20px") }}</td>
+                </tr>
+                <tr style="height: 30px">
+                    <td style="color:#363636;text-align: center">{{ form.password.label }}</td>
+                    <td>{{ form.password(style="width:300px;height:20px",id="pwd") }}</td>
+                </tr>
+                <tr style="height: 30px">
+                    <td style="color:#363636;text-align: center">{{ form.repeat_password.label }}</td>
+                    <td> {{ form.repeat_password(style="width:300px;height:20px", id = "npwd") }}</td>
+                </tr>
+                <tr style="height: 30px">
+                    <td style="color:#363636;text-align: center">{{ form.name.label }}</td>
+                    <td>{{ form.name(style="width:300px;height:20px") }}</td>
+                </tr>
+                <tr style="height: 30px">
+                    <td style="color:#363636;text-align: center">{{ form.id_card.label }}</td>
+                    <td>{{ form.id_card(style="width:300px;height:20px",id="signup_id") }}</td>
+                </tr>
+                <tr style="height: 30px">
+                    <td style="color:#363636;text-align: center">{{ form.email.label }}</td>
+                    <td>{{ form.email(style="width:300px;height:20px",id="mail") }}</td>
+                </tr>
+            </table>
+            <input type="submit" value="register" onclick="return check()">
+        </form>
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+<script>
+    var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",
+            21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",
+            34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",
+            43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川"
+            ,52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",
+            64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"}
+    function AdminSignIn() {
+	    window.location.replace('{{ url_for('admin.login') }}');
+
+    }
+    function check_mail() {
+        var mail = document.getElementById('mail').value;
+        var re = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        return true;
+    }
+    function check() {
+        var sId=document.getElementById('signup_id').value;
+        var iSum=0 ;
+        var pwd=document.getElementById('pwd').value;
+        var npwd = document.getElementById('npwd').value;
+        //aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女");//此次还可以判断出输入的身份证号的人性别
+
+
+        return true;
+        
+    }
+</script>
+</body>
+</html>

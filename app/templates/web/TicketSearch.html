@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Ticket Booking</title>
+	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+</head>
+<body style="-webkit-filter: brightness(0.7)">
+<div id="head">
+    <div class="head_title">
+        <h1>Online Reservation</h1>
+    </div>
+    <div class="navigation">
+        <div id="horizontalTab">
+            <ul id="navigation_list">
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
+            </ul>
+        </div>
+    </div>
+    <div class="admin">
+        <div class="sap_table">
+            <div class="admin-table">
+                <div class="admin-table-list">
+                    <a class="admin-table-item" onclick=AdminSignIn()><span>Admin System</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body_content">
+    <div class="content_top"></div>
+    <div class="content_left">
+        <div class="search_form">
+
+        </div>
+    </div>
+</div>
+  <h1>Ticket Booking</h1>
+	<div class="main-agileinfo">
+        <ul class="resp-tabs-list">
+            <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
+            </ul>
+        <div class="clearfix"> </div>
+        <div class="resp-tabs-container">
+            <div class="tab-1 resp-tab-content roundtrip">
+                <form action="{{url_for('web.search')}}" method="post">
+                    <div class="single_double">
+                        <h3>{{ form.single_double.label }}</h3>
+                        {{ form.single_double }}
+
+                    </div>
+                    <div class="from">
+                        <h3>{{ form.depart_city.label}}</h3>
+                        {{form.depart_city(style="width:200px")}}
+                    </div>
+                    <div class="to">
+                        <h3>{{form.arrive_city.label}}</h3>
+                        {{form.arrive_city(style="width:200px")}}
+                    </div>
+                    <div class="clear"></div>
+                    <div class="date">
+                        <div class="depart">
+                            <h3>{{form.depart_date.label}}</h3>
+                            {{form.depart_date(id="datepicker",onfocus="this.value = '';",onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}",required="",style="width:400px")}}
+                            <input  id="datepicker" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
+                            <span class="checkbox1">
+                                <label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <input type="submit" value="search">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+<div class="bottom">
+    <p>Ticket Reservation System</p>
+    <p>Copyright@2019</p>
+</div>
+<script>
+    function AdminSignIn() {
+	    window.location.replace('AdminSignIn.html');
+
+    }
+</script>
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignIn</title>
+    <!--<link rel="stylesheet" href="../../static/style.css">-->
+    <link rel="stylesheet" href="{{url_for('static', filename='admin_style.css')}}">
+</head>
+<body >
+
+
+  <h1>Admin System</h1>
+	<div class="main-agileinfo">
+		<div class="sap_tabs">
+			<div id="horizontalTab">
+				<ul class="resp-tabs-list">
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
+				</ul>
+				<div class="clearfix"> </div>
+                <div class="signinform">
+                    {% for msg in get_flashed_messages()  %}
+                        <p style="color: #cd0a0a; text-align: center">{{ msg }}</p>
+                    {% endfor %}
+                    <form class="adminsign" action="{{ url_for('admin.login') }}" method="post">
+                        <table style="margin: 0 auto;width: auto;height: auto">
+
+                            <tr style="height: 50px;width: 100px">
+                                <td style="height: 50px">{{ form.nickname.label }}</td> <td>{{ form.nickname }}</td>
+                            </tr>
+                            <tr style="height: 50px;width: 100px">
+                                <td style="height: 50px">{{ form.password.label }}</td>  <td>{{ form.password }}</td>
+                            </tr>
+                        </table>
+                        <input type="submit" value="Login">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

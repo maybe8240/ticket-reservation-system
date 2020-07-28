@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='admin_style.css')}}">
+    <title>Order Management</title>
+</head>
+<body>
+<div class="head">
+    <h1>System Management</h1>
+    <div class="url">
+        <ul class="menu">
+            <a class="menu-item" href="{{url_for('web.index')}}"><span>Home</span></a>
+            <a class="menu-item" href="{{ url_for('admin.login') }}"><span>Logout</span></a>
+        </ul>
+    </div>
+</div>
+<div class="left">
+    <div class="left-menu">
+        <div class="h5head">
+            <h2>Menu</h2>
+        </div>
+        <div class="admin_manage">
+            <div class="h3head">
+                <h3>Permission Management</h3>
+            </div>
+            <div class="admin_manage_content">
+                <ul class="admin_manage_list">
+                    <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>Add New Administrator</span></a>
+                </ul>
+            </div>
+        </div>
+        <div class="business_manage">
+            <div class="h6head">
+                <h3>Business Management</h3>
+            </div>
+            <div class="business_menu">
+                <ul class="business_menu_list">
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Flight</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Airline Management</span></a>
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Ticket Management</span></a>#}
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Flight Information</span></a>#}
+                    <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>Order Management</span></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right">
+    <div class="right_title">
+        <h3>Order Management</h3>
+    </div>
+    <div class="ticke_order_req">
+        <table  style="margin: 10px;width: 100%">
+            <tr>
+                <td> Order ID </td>
+                <td> Route </td>
+                <td> Depart Time </td>
+                <td> Ticket Type </td>
+                <td> Passenger Name </td>
+                <td> Passenger Email </td>
+                <td> Passenger ID </td>
+                <td> Status </td>
+                <td> Delete </td>
+            </tr>
+            {% for item in orders %}
+                <tr>
+                <td>{{ item.order_id }}</td>
+                <td>{{ item.route }}</td>
+                <td>{{ item.depart_time }}</td>
+                <td>{{ item.ticket_type }}</td>
+                <td>{{ item.uname }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.id_card }}</td>
+                <td>{{ item.status }}</td>
+                <td><form action="{{ url_for('admin.dispose_order',order_id = item.order_id) }}" method="post">
+                <input type="submit" value="delete">
+                </form></td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+</body>
+</html>
